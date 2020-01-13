@@ -21,7 +21,7 @@ spotify_endpoint <- oauth_endpoint(request = NULL,
 spotify_app <- oauth_app("rcsv_spotify",
                         key,
                         secret,
-                        redirect_uri = "localhost:1410")
+                        redirect_uri = "http://localhost:1410/")
 
 access_token <- oauth2.0_token(spotify_endpoint,
                               spotify_app,
