@@ -20,7 +20,8 @@ spotify_endpoint <- oauth_endpoint(request = NULL,
                                   access = "https://accounts.spotify.com/api/token")
 spotify_app <- oauth_app("rcsv_spotify",
                         key,
-                        secret)
+                        secret,
+                        redirect_uri = "localhost:1410")
 
 access_token <- oauth2.0_token(spotify_endpoint,
                               spotify_app,
@@ -30,10 +31,6 @@ access_token <- oauth2.0_token(spotify_endpoint,
 
 
 
-# Sys.setenv(SPOTIFY_CLIENT_ID = '7ee099f7cb504a49b35a24150fd19f18')
-# Sys.setenv(SPOTIFY_CLIENT_SECRET = '0f9a6ce011db42638cd04d74d393dc2d')
-# 
-# access_token <- get_spotify_access_token()
 
 
 #function to search track details
@@ -48,7 +45,7 @@ find_tracks <- function(name, artist, token = access_token) {
   
   res <- GET("https://api.spotify.com/v1/search",
              query = list(q = q, type = "track", limit = 50),
-             config(token = token))
+             config(token = access_token))
   
   content <- res %>% content()
   track_list <- content$tracks$items
